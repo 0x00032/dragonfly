@@ -1,7 +1,6 @@
 package item
 
 import (
-	"fmt"
 	"github.com/df-mc/dragonfly/server/world"
 )
 
@@ -25,8 +24,8 @@ func (FishingRod) MaxCount() int {
 func (FishingRod) Use(w *world.World, u User, ctx *UseContext) bool {
 
 	// Debug
-	fmt.Println(w)
-	fmt.Println(u)
+	create := w.EntityRegistry().Config().FishingHook
+	w.AddEntity(create(eyePosition(u), u.Rotation().Vec3().Mul(1.5), u))
 
 	ctx.DamageItem(1)
 	return true

@@ -27,6 +27,7 @@ var DefaultRegistry = conf.New([]world.EntityType{
 	SplashPotionType{},
 	TNTType{},
 	TextType{},
+	FishingHookType{},
 })
 
 var conf = world.EntityRegistryConfig{
@@ -91,5 +92,10 @@ var conf = world.EntityRegistryConfig{
 	},
 	Lightning: func(pos mgl64.Vec3) world.Entity {
 		return NewLightning(pos)
+	},
+	FishingHook: func(pos, vel mgl64.Vec3, owner world.Entity) world.Entity {
+		f := NewFishingHook(pos, owner)
+		f.vel = vel
+		return f
 	},
 }
